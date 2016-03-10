@@ -8,5 +8,6 @@ and open the template in the editor.
     Author     : admin
 */
 .menu,.titre{
+    text-align: center;
     background-color:yellow;
 }

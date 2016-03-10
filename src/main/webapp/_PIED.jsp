@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div>
-    Copyright A.G 2016
+    Copyright A.G 2016 <a href="choix_style.jsp">Choisis ton style</a>
 </div>
 </body>
 </html>

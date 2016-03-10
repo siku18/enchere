@@ -9,21 +9,37 @@
 <!DOCTYPE html>
 
 <body class="menu">
-    <div style="text-align: center">
-        <c:if test="${sessionScope.login==null}">
+    <!--Utilisateur connecte-->
+    <c:if test="${sessionScope.login==null}">
+        <div>
+            <a href="login.jsp">Se connecter</a> 
             <a href="Ajouter_utilisateur.jsp">S'inscrire</a>
-        </c:if>
+        </div>
+    </c:if>
+    <!--Utilisateur deconnecte-->
+    <c:if test="${sessionScope.login!=null}">
         <br>
-        <a href="choix_style.jsp">Choisis ton style</a> 
+        <div>
+            <a href="AjouterArticleServlet">Mettre un article aux encheres</a<!--ajout d'un article-->
+        </div
         <br>
-        <c:if test="${sessionScope.login==null}">
-            <a href="login.jsp">Se connecter</a>
-        </c:if>
-        <c:if test="${sessionScope.login!=null}">
+        <div>
+            <a href="RechercherArticleServlet">Rechercher un Article</a><!--Recherche par categorie + Nom d'article + Possibilité encherir-->
+        </div>
+        <br>
+        <div>
+            <a href="EnchereEnCoursServlet">Mes encheres en cours</a><!--Liste des enchère + Possibilité de sur-encherir-->
+        </div>
+        <br>
+        <div>
+            <a href="EnchereRemporteServlet">Encheres remportees</a><!--Liste des enchère + Possibilité de payé les enchere-->
+        </div>
+        <br>
+        <div>
             <a href="se_deconnecter">Se deconnecter</a>
-        </c:if>
+        </div>
 
+    </c:if>
 
-    </div>
 
 

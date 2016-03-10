@@ -7,6 +7,8 @@ package enchere.servlet;
 
 import enchere.spring.AutowireServlet;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -21,8 +23,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Choix_styleServlet", urlPatterns = {"/Choix_styleServlet"})
 public class ChoixStyleServlet extends AutowireServlet {
 
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        Cookie styleCookie = new Cookie("style", "");
+//        String style = req.getParameter("style");
+//        
+//        if (style.equals("blue")) {
+//            styleCookie.setValue("blue");
+//            System.out.println("On est rentré dans le blue");
+//        }
+//        else if(style.equals("red")){
+//            styleCookie.setValue("red");
+//        }
+//        else if(style.equals("yellow")){
+//            styleCookie.setValue("yellow");
+//        }
+//        resp.addCookie(styleCookie);
+//        
+//        req.getRequestDispatcher("home.jsp").forward(req, resp);
+//    }
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie styleCookie = new Cookie("style", "");
         String style = req.getParameter("style");
         
@@ -38,6 +60,9 @@ public class ChoixStyleServlet extends AutowireServlet {
         }
         resp.addCookie(styleCookie);
         
+        req.getRequestDispatcher("_TITRE.jsp").include(req, resp);
+
         req.getRequestDispatcher("home.jsp").forward(req, resp);
     }
+    
 }

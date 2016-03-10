@@ -10,6 +10,7 @@
     <head class="titre">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>STREAMING</title>
+        <link href="yellow.css" rel="stylesheet" type="text/css"/>
         <link href="${cookie.style.value}.css" rel="stylesheet" type="text/css"/>
     </head>
 
