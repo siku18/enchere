@@ -10,18 +10,20 @@
 
 <body class="menu">
     <div style="text-align: center">
-        <a href="Ajouter_utilisateur.jsp">S'inscrire</a> 
+        <c:if test="${sessionScope.login==null}">
+            <a href="Ajouter_utilisateur.jsp">S'inscrire</a>
+        </c:if>
         <br>
         <a href="choix_style.jsp">Choisis ton style</a> 
         <br>
-    <c:if test="${sessionScope.login==null}">
-        <a href="login.jsp">Se connecter</a>
-    </c:if>
-    <c:if test="${sessionScope.login!=null}">
-        <a href="se_deconnecter">Se deconnecter</a>
-    </c:if>
+        <c:if test="${sessionScope.login==null}">
+            <a href="login.jsp">Se connecter</a>
+        </c:if>
+        <c:if test="${sessionScope.login!=null}">
+            <a href="se_deconnecter">Se deconnecter</a>
+        </c:if>
 
-        
+
     </div>
 
 

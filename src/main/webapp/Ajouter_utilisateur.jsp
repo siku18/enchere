@@ -9,6 +9,11 @@
 <!DOCTYPE html>
 <c:import url="_TITRE.jsp"/>
 <c:import url="_MENU.jsp"/>
+<c:if test="${etatInscription==false}">
+    <div>
+        Login deja utilise, utilisez un autre login s'il vous plait !
+    </div>
+</c:if>
 <form action="AjouterUtilisateurServlet" method="post">
     <label>Nom</label>
     <input type="text" name="nom"/>

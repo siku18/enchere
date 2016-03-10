@@ -30,23 +30,26 @@ public class AjouterUtilisateurServlet extends AutowireServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("***********************");
-        
-        
-        Utilisateur u = new Utilisateur();
-        u.setNom((String) req.getAttribute("nom"));
-        u.setPrenom((String) req.getAttribute("prenom"));
-        u.setLogin((String) req.getAttribute("login"));
-        u.setMdp((String) req.getAttribute("mdp"));
-        u.setEmail((String) req.getAttribute("email"));
 
-        String EtatInscription = inscriptionService.inscription(u);
-        
-        System.out.println("00000000000000000000000000");
-        req.setAttribute(EtatInscription, EtatInscription);
-        
-        System.out.println(EtatInscription);
-        req.setAttribute("Utilisateur", u);
-        req.getRequestDispatcher("home.jsp").forward(req, resp);
+        Utilisateur u = new Utilisateur();
+        u.setNom((String) req.getParameter("nom"));
+        u.setPrenom((String) req.getParameter("prenom"));
+        u.setLogin((String) req.getParameter("login"));
+        u.setMdp((String) req.getParameter("mdp"));
+        u.setEmail((String) req.getParameter("email"));
+
+        System.out.println((String) req.getParameter("nom"));
+
+        Boolean etatInscription = inscriptionService.inscription(u);
+        System.out.println(etatInscription);
+
+        req.setAttribute("etatInscription", etatInscription);
+
+        if (etatInscription == false) {
+            System.out.println("+++++++++++++++++++++++++");
+            req.getRequestDispatcher("Ajouter_utilisateur.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("inscrit.jsp").forward(req, resp);
+        }
     }
 }

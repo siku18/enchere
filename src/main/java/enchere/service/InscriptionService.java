@@ -21,19 +21,19 @@ public class InscriptionService {
     @Autowired
     private UtilisateurService utilisateurService;
 
-    public String inscription(Utilisateur u) {
+    public Boolean inscription(Utilisateur u) {
 
         List<Utilisateur> listeUtilisateurs = (List<Utilisateur>) utilisateurService.findAll();
         if (!listeUtilisateurs.isEmpty()){
             for (Utilisateur u2 : listeUtilisateurs) {
                 if (u.getLogin().equals(u2.getLogin())) {
-                    return "L'inscription a ecouee, login deja utilisé";
+                    System.out.println("**********************************");
+                    return false;
                 }
             }
         }
-        System.out.println("56456456456446546546846515684");
         utilisateurService.save(u);
-        return "inscription a ete effectuer";
+        return true;
     }
 
 }

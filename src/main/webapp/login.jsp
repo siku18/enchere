@@ -12,7 +12,7 @@
 <c:import url="_MENU.jsp"/>
 
 <form action="loginServlet" method="post">
-    <c:if test="${b==false}">
+    <c:if test="${estLogger==false}">
         <div>Login ou mot de passe Erroné, veuillez réessayer</div>
     </c:if>
     <c:if test="${accesAutoriser==false}">
