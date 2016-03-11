@@ -25,17 +25,11 @@ public class Categorie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
-    private List<String> sousCategories;
+
 
     @OneToMany(mappedBy = "categorie")
     private List<Article> articles;
 
-    
-    
-    
-    
-    
-    
     
     public String getNom() {
         return nom;
@@ -43,14 +37,6 @@ public class Categorie implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public List<String> getSousCategories() {
-        return sousCategories;
-    }
-
-    public void setSousCategories(List<String> sousCategories) {
-        this.sousCategories = sousCategories;
     }
 
     public List<Article> getArticles() {

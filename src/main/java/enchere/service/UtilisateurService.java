@@ -5,8 +5,10 @@
  */
 package enchere.service;
 
+import enchere.entity.Article;
 import enchere.entity.Utilisateur;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UtilisateurService extends CrudRepository<Utilisateur, Long>{
+    
+    
+        public List<Utilisateur> findByLogin(String login);
     
 }

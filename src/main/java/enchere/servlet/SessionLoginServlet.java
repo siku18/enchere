@@ -50,8 +50,8 @@ public class SessionLoginServlet extends AutowireServlet {
             }
         }
         req.setAttribute("estLogger", estLogger);
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
-        req.getRequestDispatcher("loger.jsp").forward(req, resp);
+        req.getRequestDispatcher("login.jsp").include(req, resp);
+        req.getRequestDispatcher("utilisateur_logger.jsp").forward(req, resp);
     }
 }
 

@@ -6,12 +6,17 @@
 package enchere.service;
 
 import enchere.entity.Article;
+import enchere.entity.Utilisateur;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author admin
  */
+@Service
 public interface ArticleService extends CrudRepository<Article, Long>{
     
+    public List<Article> findByUtilisateur (Utilisateur utilisateur);
 }

@@ -26,6 +26,11 @@
         <br>
         <br>
         <div>
+            <a href="ListeArticleServlet">Mes articles mis en vente</a<!--ajout d'un article-->
+        </div
+        <br>
+        <br>
+        <div>
             <a href="RechercherArticleServlet">Rechercher un Article</a><!--Recherche par categorie + Nom d'article + Possibilité encherir-->
         </div>
         <br>

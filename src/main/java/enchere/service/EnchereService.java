@@ -7,11 +7,13 @@ package enchere.service;
 
 import enchere.entity.Enchere;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author admin
  */
+@Service
 public interface EnchereService extends CrudRepository<Enchere, Long>{
     
 }

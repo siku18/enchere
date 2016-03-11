@@ -5,12 +5,9 @@
  */
 package enchere.entity;
 
-import enchere.enumeration.StatutArticleEnum;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,9 +28,9 @@ public class Article implements Serializable {
     private Long id;
     private String nom;
     private Long prix;
-
-    @Enumerated(EnumType.STRING)
-    private StatutArticleEnum statutArticle;
+    private String description;
+    private Boolean disponible;
+    private Boolean paye;
 
     
     @ManyToOne
@@ -47,11 +44,36 @@ public class Article implements Serializable {
     @OneToMany(mappedBy = "article") 
     private List<Enchere> enchere;
 
+    public Article() {
+        this.setPaye(false);
+        this.setDisponible(true);
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public Boolean getPaye() {
+        return paye;
+    }
+
+    public void setPaye(Boolean paye) {
+        this.paye = paye;
+    }
+
     
-    
-    
-    
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -66,14 +88,6 @@ public class Article implements Serializable {
 
     public void setPrix(Long prix) {
         this.prix = prix;
-    }
-
-    public StatutArticleEnum getStatutArticle() {
-        return statutArticle;
-    }
-
-    public void setStatutArticle(StatutArticleEnum statutArticle) {
-        this.statutArticle = statutArticle;
     }
 
     public Utilisateur getUtilisateur() {
