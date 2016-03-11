@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 /**
  *
  * @author admin
@@ -36,24 +35,23 @@ public class SessionLoginServlet extends AutowireServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Utilisateur> listeUtil = new ArrayList<>();
-        listeUtil= (List<Utilisateur>) utilisateurService.findAll();
-
+        listeUtil = (List<Utilisateur>) utilisateurService.findAll();
+        
         Boolean estLogger = false;
-        for (Utilisateur u : listeUtil) {
-            System.out.println(u.getLogin());
-            if ((u.getLogin().equals(req.getParameter("login"))) & ((u.getMdp().equals(req.getParameter("mdp"))))) {
-                req.getSession().setAttribute("login", req.getParameter("login"));
-                req.getSession().setAttribute("mdp", req.getParameter("mdp"));
-                estLogger = true;
+
+        if (listeUtil.size() != 0) {
+            for (Utilisateur u : listeUtil) {
+                System.out.println(u.getLogin());
+                if ((u.getLogin().equals(req.getParameter("login"))) & ((u.getMdp().equals(req.getParameter("mdp"))))) {
+                    req.getSession().setAttribute("login", req.getParameter("login"));
+                    req.getSession().setAttribute("mdp", req.getParameter("mdp"));
+                    estLogger = true;
+                }
             }
         }
-        if (estLogger == false) {
-            req.setAttribute("estLogger", estLogger);
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
-        }
-        else{
+        req.setAttribute("estLogger", estLogger);
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
         req.getRequestDispatcher("loger.jsp").forward(req, resp);
-        }
     }
-
 }
+

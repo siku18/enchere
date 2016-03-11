@@ -19,26 +19,32 @@
     <!--Utilisateur deconnecte-->
     <c:if test="${sessionScope.login!=null}">
         <br>
+        <br>
         <div>
             <a href="AjouterArticleServlet">Mettre un article aux encheres</a<!--ajout d'un article-->
         </div
+        <br>
         <br>
         <div>
             <a href="RechercherArticleServlet">Rechercher un Article</a><!--Recherche par categorie + Nom d'article + Possibilité encherir-->
         </div>
         <br>
+        <br>
         <div>
             <a href="EnchereEnCoursServlet">Mes encheres en cours</a><!--Liste des enchère + Possibilité de sur-encherir-->
         </div>
+        <br>
         <br>
         <div>
             <a href="EnchereRemporteServlet">Encheres remportees</a><!--Liste des enchère + Possibilité de payé les enchere-->
         </div>
         <br>
+        <br>
         <div>
             <a href="se_deconnecter">Se deconnecter</a>
         </div>
-
+        <br>
+        <br>
     </c:if>
 
 
