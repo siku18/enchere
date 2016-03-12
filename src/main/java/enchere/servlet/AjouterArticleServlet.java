@@ -36,55 +36,51 @@ public class AjouterArticleServlet extends AutowireServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
     }
-
     
+    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("********************************");
         System.out.println(req.getRequestURI());
         System.out.println("********************************");
-        
-        if (!req.getRequestURI().equals("/enchere/AjouterArticleServlet")) {
-            Article a = new Article();
-            a.setNom((String) req.getParameter("nom"));
-            a.setPrix(Long.parseLong(req.getParameter("prix")));
-            a.setDescription((String) req.getParameter("description"));
 
-            String cat = req.getParameter("categorie");
-            String ajoutcat = (String) req.getParameter("ajoutCategorie");
+        Article a = new Article();
+        a.setNom((String) req.getParameter("nom"));
+        a.setPrix(Long.parseLong(req.getParameter("prix")));
+        a.setDescription((String) req.getParameter("description"));
 
-            //recuperation de la categorie
-            Categorie categorie = categorieService.findByNom(cat);
+        String cat = req.getParameter("categorie");
+        String ajoutcat = (String) req.getParameter("ajoutCategorie");
 
-            System.out.println(ajoutcat);
+        //recuperation de la categorie
+        Categorie categorie = categorieService.findByNom(cat);
 
-            //Cas ou l'on crée une nouvelle categorie
-            Categorie c = new Categorie();
-            if (!"".equals(ajoutcat)) {
-                c.setNom(ajoutcat);
-                categorieService.save(c);
-                categorie = categorieService.findByNom(ajoutcat);
-                System.out.println("99999999999999999999999999999999");
-            }
+        System.out.println(ajoutcat);
 
-            //Récupération de l'utilisateur qui crée l'article
-            List<Utilisateur> util = utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
-            Utilisateur u = util.get(0);
-
-            //Sauvegarde de l'utilisateur (et de l'article)
-            u.getArticles().add(a);
-            a.setUtilisateur(u);
-
-            //Sauvegrde de la categorie (et de l'article)
-            categorieService.save(categorie);
-            utilisateurService.save(u);
-//        articleService.save(a);
+        //Cas ou l'on crée une nouvelle categorie
+        Categorie c = new Categorie();
+        if (!"".equals(ajoutcat)) {
+            c.setNom(ajoutcat);
+            //Récupération de la Categorie ajouter
+            categorie = c;
         }
-        List<Categorie> listeCategorie = (List<Categorie>) categorieService.findAll();
-        System.out.println("******************************");
-        System.out.println(listeCategorie);
-        System.out.println("******************************");
-        req.setAttribute("listeCategorie", listeCategorie);
+
+        //Récupération de l'utilisateur qui crée l'article
+        List<Utilisateur> util = utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
+        Utilisateur u = util.get(0);
+
+        //Sauvegarde de l'utilisateur (et de l'article)
+        u.getArticles().add(a);
+        a.setUtilisateur(u);
+//        utilisateurService.save(u);
+
+        //Sauvegrde de la categorie (et de l'article)
+        categorie.getArticles().add(a);
+        a.setCategorie(categorie);
+        categorieService.save(categorie);
+
+//        articleService.save(a);
 
         req.getRequestDispatcher("article_ajouter.jsp").forward(req, resp);
 

@@ -6,6 +6,7 @@
 package enchere.servlet;
 
 import enchere.entity.Article;
+import enchere.entity.Categorie;
 import enchere.entity.Utilisateur;
 import enchere.service.ArticleService;
 import enchere.service.UtilisateurService;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +35,11 @@ public class DetailArticleServlet extends AutowireServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
-        System.out.println("****************" + id);
 
         System.out.println((String) req.getSession().getAttribute("login"));
         
         List<Utilisateur> util=utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
-        
-        System.out.println("+++++++++++++++++++++++");
-        
         Utilisateur u = util.get(0);
-        System.out.println("+++++++++++++++++++++++");
 
         List<Article> listeArticle = articleService.findByUtilisateur(u);
 
@@ -54,6 +49,12 @@ public class DetailArticleServlet extends AutowireServlet {
                 article = a;
             }
         }
+        
+        Categorie c = article.getCategorie();
+        Utilisateur u1 = article.getUtilisateur();
+        
+        req.setAttribute("Utilisateur", u1);
+        req.setAttribute("Categorie", c);
         req.setAttribute("article", article);
         req.getRequestDispatcher("detail_article.jsp").forward(req, resp);
     }

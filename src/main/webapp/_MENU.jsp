@@ -21,7 +21,7 @@
         <br>
         <br>
         <div>
-            <a href="AjouterArticleServlet">Mettre un article aux encheres</a<!--ajout d'un article-->
+            <a href="ListeCategorieServlet">Mettre un article aux encheres</a<!--ajout d'un article-->
         </div
         <br>
         <br>

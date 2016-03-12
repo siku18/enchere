@@ -22,12 +22,15 @@
     <textarea name="description"></textarea>
     <br>
     <label>Categorie</label>
-    <SELECT name="style" id='style'>
-        <c:forEach items="listeCategorie" var="Categorie">
+    <SELECT name="categorie" id='style'>
+        <option selected="Aucune">Aucune</option>
+        <c:forEach items="${listeCategorie}" var="Categorie">
             <OPTION>${Categorie.nom}
         </c:forEach>
     </SELECT>
+    <br>
     <label>Categorie inexistante, ajouter une categorie ?</label>
+    <br>
     <input type="text" name="ajoutCategorie"/>
     <br>
     <input type="submit"/>

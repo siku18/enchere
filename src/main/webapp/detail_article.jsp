@@ -22,5 +22,12 @@
 <div>
     Prix = ${article.prix}
 </div>
-<if 
+<div>
+    Categorie = ${Categorie}
+</div>
+<c:if test="${sessionScope.login}!=${Utilisateur}">
+    <div>
+    Utilisateur = ${Utilisateur}
+</div>
+</c:if>
 <c:import url="_PIED.jsp"/>
