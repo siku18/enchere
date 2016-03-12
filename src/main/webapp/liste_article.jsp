@@ -10,12 +10,18 @@
 
 <c:import url="_TITRE.jsp"/>
 <c:import url="_MENU.jsp"/>
-
+<c:if test="${listevide==true}">
+    <DIV>
+        Aucun article trouve !
+    </DIV>
+</c:if>
 <c:forEach items="${listeArticle}" var="monArticle">
     <BR>
-    <DIV>
-        Nom de l'article = <a href="DetailArticleServlet?id=${monArticle.id}">${monArticle.nom}</a>
-    </DIV>
-        <BR>
+    <c:if test="${listevide==false}">
+        <DIV>
+            Nom de l'article = <a href="DetailArticleServlet?id=${monArticle.id}">${monArticle.nom}</a>
+        </DIV>
+    </c:if>
+    <BR>
 </c:forEach>
 <c:import url="_PIED.jsp"/>

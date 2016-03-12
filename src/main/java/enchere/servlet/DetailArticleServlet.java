@@ -34,27 +34,34 @@ public class DetailArticleServlet extends AutowireServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
 
-        System.out.println((String) req.getSession().getAttribute("login"));
+        List<Article> listeArticle = (List<Article>) articleService.findAll();
         
-        List<Utilisateur> util=utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
-        Utilisateur u = util.get(0);
-
-        List<Article> listeArticle = articleService.findByUtilisateur(u);
-
         Article article = new Article();
+        Long id = Long.parseLong(req.getParameter("id"));
+        System.out.println("*********************************");
+        System.out.println(id);
         for (Article a : listeArticle) {
-            if (a.getId() == id) {
+            if (a.getId().equals(id)) {
                 article = a;
+                System.out.println("*********************************");
+                System.out.println(article.getNom());
             }
         }
         
+        String utilLoger = (String) req.getSession().getAttribute("login");
+        Utilisateur u2 = article.getUtilisateur();
+        System.out.println("*********************************");
+        System.out.println(utilLoger);
+        System.out.println(u2.getLogin());
+        Boolean droitEncherir=false;
+        if (!utilLoger.equals(u2.getLogin())){
+            droitEncherir=true;
+        }
         Categorie c = article.getCategorie();
-        Utilisateur u1 = article.getUtilisateur();
-        
-        req.setAttribute("Utilisateur", u1);
-        req.setAttribute("Categorie", c);
+        req.setAttribute("categorie", c);
+        req.setAttribute("utilisateur", u2);
+        req.setAttribute("droitEncherir", droitEncherir);
         req.setAttribute("article", article);
         req.getRequestDispatcher("detail_article.jsp").forward(req, resp);
     }

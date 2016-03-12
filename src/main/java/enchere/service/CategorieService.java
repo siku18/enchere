@@ -18,4 +18,6 @@ public interface CategorieService extends CrudRepository<Categorie, Long>{
     
     public Categorie findByNom (String nom);
     
+    
+    
 }

@@ -33,19 +33,22 @@ public class ListeCategorieServlet extends AutowireServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         List<Categorie> listeCategorie = (List<Categorie>) categorieService.findAll();
-        System.out.println("******************************");
         System.out.println(listeCategorie);
-        System.out.println("******************************");
-        if (listeCategorie.isEmpty()){
+        if (listeCategorie.isEmpty()) {
             Categorie c = new Categorie();
             c.setNom("Livres");
             categorieService.save(c);
             listeCategorie.add(c);
         }
         req.setAttribute("listeCategorie", listeCategorie);
-
-        req.getRequestDispatcher("ajouter_article.jsp").forward(req, resp);
+        
+        if (req.getParameter("url").equals("ajouterArticle")) {
+            req.getRequestDispatcher("ajouter_article.jsp").forward(req, resp);
+        }
+        if (req.getParameter("url").equals("rechercherArticle")) {
+            req.getRequestDispatcher("rechercher_article.jsp").forward(req, resp);
+        }
     }
 }

@@ -21,6 +21,6 @@ import org.springframework.stereotype.Service;
 public interface UtilisateurService extends CrudRepository<Utilisateur, Long>{
     
     
-        public List<Utilisateur> findByLogin(String login);
+        public Utilisateur findByLogin(String login);
     
 }

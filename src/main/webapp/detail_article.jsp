@@ -17,17 +17,26 @@
     Nom de l'article : ${article.nom}
 </div>
 <div>
-    Description = ${article.description}
+    Description : ${article.description}
 </div>
 <div>
-    Prix = ${article.prix}
+    Categorie : ${categorie.nom}
 </div>
-<div>
-    Categorie = ${Categorie}
-</div>
-<c:if test="${sessionScope.login}!=${Utilisateur}">
+<c:if test="${droitEncherir==true}">
     <div>
-    Utilisateur = ${Utilisateur}
+    Utilisateur : ${utilisateur.login}
 </div>
 </c:if>
+<div>
+    Prix : ${article.prix}
+</div>
+<c:if test="${droitEncherir==true}">
+    <div>
+    Encherir:
+    <form action="EncherirServlet" method="doPost">
+          <input type="text" name="encherir"/>
+    </form>
+</div>
+</c:if>
+
 <c:import url="_PIED.jsp"/>

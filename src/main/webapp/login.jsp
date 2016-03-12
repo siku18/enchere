@@ -13,12 +13,11 @@
 
 <form action="loginServlet" method="post">
     <c:if test="${estLogger==false}">
-        <div>Login ou mot de passe Erroné, veuillez réessayer</div>
+        <div>Login ou mot de passe Errone, veuillez reessayer</div>
     </c:if>
     <c:if test="${accesAutoriser==false}">
         <div>Vous n'avez pas acces a cette page ! Logger vous pour y acceder</div>
     </c:if>
-        
     <label>login</label>
     <input type="text" name="login"/>
     <br>

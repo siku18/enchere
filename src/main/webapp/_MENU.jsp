@@ -14,6 +14,8 @@
         <div>
             <a href="login.jsp">Se connecter</a> 
             <a href="Ajouter_utilisateur.jsp">S'inscrire</a>
+            <Br>
+            <a href="home.jsp">Menu</a> 
         </div>
     </c:if>
     <!--Utilisateur deconnecte-->
@@ -21,17 +23,17 @@
         <br>
         <br>
         <div>
-            <a href="ListeCategorieServlet">Mettre un article aux encheres</a<!--ajout d'un article-->
+            <a href="ListeCategorieServlet?url=ajouterArticle">Mettre un article aux encheres</a<!--ajout d'un article-->
         </div
         <br>
         <br>
         <div>
-            <a href="ListeArticleServlet">Mes articles mis en vente</a<!--ajout d'un article-->
+            <a href="RechercherArticleServlet?url=mesArticles">Mes articles mis en vente</a<!--ajout d'un article-->
         </div
         <br>
         <br>
         <div>
-            <a href="RechercherArticleServlet">Rechercher un Article</a><!--Recherche par categorie + Nom d'article + Possibilité encherir-->
+            <a href="ListeCategorieServlet?url=rechercherArticle">Rechercher un Article</a><!--Recherche par categorie + Nom d'article + Possibilité encherir-->
         </div>
         <br>
         <br>

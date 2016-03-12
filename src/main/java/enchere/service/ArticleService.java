@@ -6,6 +6,7 @@
 package enchere.service;
 
 import enchere.entity.Article;
+import enchere.entity.Categorie;
 import enchere.entity.Utilisateur;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
@@ -19,4 +20,8 @@ import org.springframework.stereotype.Service;
 public interface ArticleService extends CrudRepository<Article, Long>{
     
     public List<Article> findByUtilisateur (Utilisateur utilisateur);
+    
+    public List<Article> findByCategorie (Categorie categorie);
+    
+    public Article findByNom ( String nom);
 }

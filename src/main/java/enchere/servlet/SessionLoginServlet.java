@@ -36,22 +36,26 @@ public class SessionLoginServlet extends AutowireServlet {
 
         List<Utilisateur> listeUtil = new ArrayList<>();
         listeUtil = (List<Utilisateur>) utilisateurService.findAll();
-        
+
         Boolean estLogger = false;
 
-        if (listeUtil.size() != 0) {
+        if (!listeUtil.isEmpty()) {
             for (Utilisateur u : listeUtil) {
-                System.out.println(u.getLogin());
-                if ((u.getLogin().equals(req.getParameter("login"))) & ((u.getMdp().equals(req.getParameter("mdp"))))) {
-                    req.getSession().setAttribute("login", req.getParameter("login"));
-                    req.getSession().setAttribute("mdp", req.getParameter("mdp"));
-                    estLogger = true;
+                if (u.getLogin().equals(req.getParameter("login"))) {
+                    if (u.getMdp().equals(req.getParameter("mdp"))) {
+                        req.getSession().setAttribute("login", req.getParameter("login"));
+                        req.getSession().setAttribute("mdp", req.getParameter("mdp"));
+                        estLogger = true;
+                    }
                 }
             }
         }
         req.setAttribute("estLogger", estLogger);
-        req.getRequestDispatcher("login.jsp").include(req, resp);
-        req.getRequestDispatcher("utilisateur_logger.jsp").forward(req, resp);
+        if (estLogger == true) {
+            req.getRequestDispatcher("est_loger.jsp").forward(req, resp);
+        }
+        else{
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        }
     }
 }
-

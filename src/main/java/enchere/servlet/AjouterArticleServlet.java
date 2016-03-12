@@ -33,17 +33,7 @@ public class AjouterArticleServlet extends AutowireServlet {
     private UtilisateurService utilisateurService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doPost(req, resp);
-    }
-    
-    
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("********************************");
-        System.out.println(req.getRequestURI());
-        System.out.println("********************************");
 
         Article a = new Article();
         a.setNom((String) req.getParameter("nom"));
@@ -56,32 +46,31 @@ public class AjouterArticleServlet extends AutowireServlet {
         //recuperation de la categorie
         Categorie categorie = categorieService.findByNom(cat);
 
-        System.out.println(ajoutcat);
-
         //Cas ou l'on crée une nouvelle categorie
         Categorie c = new Categorie();
         if (!"".equals(ajoutcat)) {
-            c.setNom(ajoutcat);
-            //Récupération de la Categorie ajouter
-            categorie = c;
+            if (categorieService.findByNom(cat) == null) {
+                c.setNom(ajoutcat);
+                //Récupération de la objet de classe Categorie ajouter
+                categorie = c;
+                //Sauvegarde de la categorie pour attribution d'un id
+                categorieService.save(c);
+            }
         }
-
         //Récupération de l'utilisateur qui crée l'article
-        List<Utilisateur> util = utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
-        Utilisateur u = util.get(0);
+        Utilisateur u = utilisateurService.findByLogin((String) req.getSession().getAttribute("login"));
 
-        //Sauvegarde de l'utilisateur (et de l'article)
+        //Set de l'utilisateur associer
         u.getArticles().add(a);
         a.setUtilisateur(u);
-//        utilisateurService.save(u);
 
-        //Sauvegrde de la categorie (et de l'article)
+        //Sauvegarde de la categorie (de l'article, et de l'utilisateur)
+        System.out.println(c);
         categorie.getArticles().add(a);
         a.setCategorie(categorie);
         categorieService.save(categorie);
 
 //        articleService.save(a);
-
         req.getRequestDispatcher("article_ajouter.jsp").forward(req, resp);
 
     }
