@@ -22,11 +22,7 @@
 <div>
     Categorie : ${categorie.nom}
 </div>
-<c:if test="${droitEncherir==true}">
-    <div>
-    Utilisateur : ${utilisateur.login}
-</div>
-</c:if>
+    Vendeur : ${utilisateur.login}
 <div>
     Prix : ${article.prix}
 </div>
