@@ -33,6 +33,10 @@
     <br>
     <input type="text" name="ajoutCategorie"/>
     <br>
+    <label>Date d expiration de l enchere</label>
+    <br>
+    <input type="datetime" name="dateExpiration" min="${date}"/>
+    <br>
     <input type="submit"/>
 </form>
 

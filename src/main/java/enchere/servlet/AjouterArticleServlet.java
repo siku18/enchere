@@ -39,6 +39,7 @@ public class AjouterArticleServlet extends AutowireServlet {
         a.setNom((String) req.getParameter("nom"));
         a.setPrix(Long.parseLong(req.getParameter("prix")));
         a.setDescription((String) req.getParameter("description"));
+        a.setDescription((String) req.getParameter("dateExpiration"));
 
         String cat = req.getParameter("categorie");
         String ajoutcat = (String) req.getParameter("ajoutCategorie");

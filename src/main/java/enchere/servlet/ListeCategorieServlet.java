@@ -13,6 +13,8 @@ import enchere.service.UtilisateurService;
 import enchere.spring.AutowireServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +45,10 @@ public class ListeCategorieServlet extends AutowireServlet {
             listeCategorie.add(c);
         }
         req.setAttribute("listeCategorie", listeCategorie);
-        
+        Date date= new Date().from(Instant.now());
+        System.out.println("**************************");
+        System.out.println(date);
+        req.setAttribute("date", date);
         if (req.getParameter("url").equals("ajouterArticle")) {
             req.getRequestDispatcher("ajouter_article.jsp").forward(req, resp);
         }

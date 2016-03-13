@@ -22,17 +22,22 @@
 <div>
     Categorie : ${categorie.nom}
 </div>
-    Vendeur : ${utilisateur.login}
+Vendeur : ${utilisateur.login}
 <div>
     Prix : ${article.prix}
 </div>
 <c:if test="${droitEncherir==true}">
     <div>
-    Encherir:
-    <form action="EncherirServlet" method="doPost">
-          <input type="text" name="encherir"/>
-    </form>
-</div>
+        Encherir:
+        <form action="EncherirServlet" method="doPost">
+            <input type="text" name="encherir"/>
+        </form>
+        <input type="hidden" name="id" value="${article.id}">
+    </div>
 </c:if>
-
+<c:if test="${article.disponible==false}">
+    <div>
+        L'article n'est plus disponible a la vente !
+    </div>
+</c:if>
 <c:import url="_PIED.jsp"/>

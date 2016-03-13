@@ -6,6 +6,7 @@
 package enchere.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -31,6 +34,8 @@ public class Article implements Serializable {
     private String description;
     private Boolean disponible;
     private Boolean paye;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateExpirationEnchere;
 
     
     @ManyToOne
@@ -47,6 +52,14 @@ public class Article implements Serializable {
     public Article() {
         this.setPaye(false);
         this.setDisponible(true);
+    }
+
+    public Date getDateExpirationEnchere() {
+        return dateExpirationEnchere;
+    }
+
+    public void setDateExpirationEnchere(Date dateExpirationEnchere) {
+        this.dateExpirationEnchere = dateExpirationEnchere;
     }
 
     public Boolean getDisponible() {

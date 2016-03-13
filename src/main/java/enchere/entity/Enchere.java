@@ -6,14 +6,15 @@
 package enchere.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,7 +27,8 @@ public class Enchere implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
     
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
@@ -36,12 +38,6 @@ public class Enchere implements Serializable {
     @JoinColumn(name = "article_id")
     private Article article;
 
-    
-    
-    
-    
-    
-    
     
     public Utilisateur getUtilisateur() {
         return utilisateur;

@@ -50,6 +50,7 @@ public class RechercherArticleServlet extends AutowireServlet {
         req.setAttribute("listevide", listevide);
         req.setAttribute("listeArticle", listeArticle);
         req.getRequestDispatcher("liste_article.jsp").forward(req, resp);
+        
     }
     
     
