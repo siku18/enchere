@@ -12,7 +12,11 @@ import enchere.service.CategorieService;
 import enchere.service.UtilisateurService;
 import enchere.spring.AutowireServlet;
 import java.io.IOException;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +43,15 @@ public class AjouterArticleServlet extends AutowireServlet {
         a.setNom((String) req.getParameter("nom"));
         a.setPrix(Long.parseLong(req.getParameter("prix")));
         a.setDescription((String) req.getParameter("description"));
-        a.setDescription((String) req.getParameter("dateExpiration"));
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+        Date d = new Date();
+        try {
+            d = sdf.parse((String) req.getParameter("dateExpiration"));
+        } catch (ParseException ex) {
+            Logger.getLogger(AjouterArticleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        a.setDateExpirationEnchere(d);
 
         String cat = req.getParameter("categorie");
         String ajoutcat = (String) req.getParameter("ajoutCategorie");
@@ -66,7 +78,6 @@ public class AjouterArticleServlet extends AutowireServlet {
         a.setUtilisateur(u);
 
         //Sauvegarde de la categorie (de l'article, et de l'utilisateur)
-        System.out.println(c);
         categorie.getArticles().add(a);
         a.setCategorie(categorie);
         categorieService.save(categorie);

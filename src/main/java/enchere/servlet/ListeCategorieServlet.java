@@ -5,20 +5,15 @@
  */
 package enchere.servlet;
 
-import enchere.entity.Article;
 import enchere.entity.Categorie;
-import enchere.entity.Utilisateur;
 import enchere.service.CategorieService;
-import enchere.service.UtilisateurService;
 import enchere.spring.AutowireServlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +40,9 @@ public class ListeCategorieServlet extends AutowireServlet {
             listeCategorie.add(c);
         }
         req.setAttribute("listeCategorie", listeCategorie);
+        
+        //Pour obliger une valeur minimum de la date lors de la saisie de la creation de l'article
         Date date= new Date().from(Instant.now());
-        System.out.println("**************************");
-        System.out.println(date);
         req.setAttribute("date", date);
         if (req.getParameter("url").equals("ajouterArticle")) {
             req.getRequestDispatcher("ajouter_article.jsp").forward(req, resp);

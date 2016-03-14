@@ -33,11 +33,11 @@
     <br>
     <input type="text" name="ajoutCategorie"/>
     <br>
-    <label>Date d expiration de l enchere</label>
+    <label>Date d expiration de l enchere (Au format dd-MM-yy)</label>
     <br>
     <input type="datetime" name="dateExpiration" min="${date}"/>
-    <br>
-    <input type="submit"/>
+   <br>
+    <input type="submit"/> 
 </form>
 
 <c:import url="_PIED.jsp"/>

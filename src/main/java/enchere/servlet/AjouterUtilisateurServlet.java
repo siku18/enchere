@@ -35,15 +35,12 @@ public class AjouterUtilisateurServlet extends AutowireServlet {
         u.setMdp((String) req.getParameter("mdp"));
         u.setEmail((String) req.getParameter("email"));
 
-        System.out.println((String) req.getParameter("nom"));
 
         Boolean etatInscription = inscriptionService.inscription(u);
-        System.out.println(etatInscription);
 
         req.setAttribute("etatInscription", etatInscription);
 
         if (etatInscription == false) {
-            System.out.println("+++++++++++++++++++++++++");
             req.getRequestDispatcher("Ajouter_utilisateur.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("inscrit.jsp").forward(req, resp);

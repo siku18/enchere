@@ -38,6 +38,14 @@ public class Enchere implements Serializable {
     @JoinColumn(name = "article_id")
     private Article article;
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     
     public Utilisateur getUtilisateur() {
         return utilisateur;

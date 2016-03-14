@@ -33,27 +33,30 @@ public class DetailArticleServlet extends AutowireServlet {
     private UtilisateurService utilisateurService;
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
+    
+    
+    
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Article> listeArticle = (List<Article>) articleService.findAll();
         
         Article article = new Article();
         Long id = Long.parseLong(req.getParameter("id"));
-        System.out.println("*********************************");
         System.out.println(id);
         for (Article a : listeArticle) {
             if (a.getId().equals(id)) {
                 article = a;
-                System.out.println("*********************************");
                 System.out.println(article.getNom());
             }
         }
         
         String utilLoger = (String) req.getSession().getAttribute("login");
         Utilisateur u2 = article.getUtilisateur();
-        System.out.println("*********************************");
-        System.out.println(utilLoger);
-        System.out.println(u2.getLogin());
         Boolean droitEncherir=false;
         if (!utilLoger.equals(u2.getLogin())){
             droitEncherir=true;
