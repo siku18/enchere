@@ -6,6 +6,7 @@
 package enchere.service;
 
 import enchere.entity.Article;
+import enchere.entity.Enchere;
 import enchere.entity.Utilisateur;
 import java.io.Serializable;
 import java.util.List;
@@ -22,5 +23,6 @@ public interface UtilisateurService extends CrudRepository<Utilisateur, Long>{
     
     
         public Utilisateur findByLogin(String login);
+        
     
 }

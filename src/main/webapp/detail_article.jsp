@@ -29,11 +29,11 @@
 <div>
     Date d'expiration de l'enchere : ${article.dateExpirationEnchere}
 </div>
-<c:if test="${enchereEffectue==true}">
+
 <div>
     Dernier encherisseur : ${encherisseur.login}
 </div>
-</c:if>
+
 <c:if test="${droitEncherir==true}">
     <div>
         Encherir:
@@ -45,13 +45,20 @@
         </form>
     </div>
 </c:if>
-    
+<c:if test="${enchereEffectue==true}">
+    <br>
+    <div>
+        L'enchere a bien été enregistrée !
+    </div>
+</c:if>
 <c:if test="${article.disponible==false}">
+    <br>
     <div>
         L'article n'est plus disponible a la vente !
     </div>
 </c:if>
 <c:if test="${montantInsuffisant==true}">
+    <br>
     <div>
         Montant de l'enchere Insuffisant ! Le montant de l'enchere doit etre superieur au montant de l'enchere precedente
     </div>

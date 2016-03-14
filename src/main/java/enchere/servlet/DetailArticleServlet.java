@@ -7,9 +7,11 @@ package enchere.servlet;
 
 import enchere.entity.Article;
 import enchere.entity.Categorie;
+import enchere.entity.Enchere;
 import enchere.entity.Utilisateur;
 import enchere.service.ArticleService;
-import enchere.service.UtilisateurService;
+import enchere.service.EnchereService;
+import enchere.service.RafraichiDisponibleService;
 import enchere.spring.AutowireServlet;
 import java.io.IOException;
 import java.util.List;
@@ -30,21 +32,23 @@ public class DetailArticleServlet extends AutowireServlet {
     private ArticleService articleService;
 
     @Autowired
-    private UtilisateurService utilisateurService;
+    private EnchereService enchereService;
+    
+    @Autowired
+    private RafraichiDisponibleService rafraichiDisponibleService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doGet(req, resp);
     }
-    
-    
-    
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //Raffraichi la liste des article (set disponnible)
         List<Article> listeArticle = (List<Article>) articleService.findAll();
-        
+        for (Article a :listeArticle){
+            rafraichiDisponibleService.ActualisDisponnible(a);
+        }
         Article article = new Article();
         Long id = Long.parseLong(req.getParameter("id"));
         System.out.println(id);
@@ -54,14 +58,23 @@ public class DetailArticleServlet extends AutowireServlet {
                 System.out.println(article.getNom());
             }
         }
-        
+
         String utilLoger = (String) req.getSession().getAttribute("login");
         Utilisateur u2 = article.getUtilisateur();
-        Boolean droitEncherir=false;
-        if (!utilLoger.equals(u2.getLogin())){
-            droitEncherir=true;
+        Boolean droitEncherir = false;
+        if (!utilLoger.equals(u2.getLogin())) {
+            droitEncherir = true;
+        }
+        Utilisateur encherisseur= new Utilisateur();
+        System.out.println(article.getEnchere());
+        encherisseur.setLogin("Aucun");
+        List<Enchere> listeEnchere = enchereService.findByArticle(article);
+        if (!listeEnchere.isEmpty()) {
+            System.out.println("8888888888888888999999999999999999999111111111111111111");
+            encherisseur = listeEnchere.get(listeEnchere.size()-1).getUtilisateur();
         }
         Categorie c = article.getCategorie();
+        req.setAttribute("encherisseur", encherisseur);
         req.setAttribute("categorie", c);
         req.setAttribute("utilisateur", u2);
         req.setAttribute("droitEncherir", droitEncherir);
